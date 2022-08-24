@@ -2,25 +2,39 @@ import { useState, useEffect } from 'react'
 import Home from './components/Home'
 import Questions from './components/Questions'
 import Result from './components/Result'
+import questionsData from './data'
 
 
 function App() {
 
   const [questions, setQuestions] = useState()
+  // const [answerOptions, setAnswerOptions] = useState()
 
-  function getQuestions() {
-    fetch('https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple')
-    .then(res => res.json())
-    .then(data => setQuestions(data.results))
-  }
+  // function getQuestions() {
+  //   fetch('https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple')
+  //   .then(res => res.json())
+  //   .then(data => setQuestions(data.results))
+  // }
   
   useEffect(function() {
-      getQuestions()
+      setQuestions(questionsData)
   },[])
+
+  // function generateNewQuestions() {
+  //   return {
+  //     id: 
+  //   }
+  // }
+
+  // function getAnswerOption() {
+  //   const answerOption = []
+  //   questions.map(data => answerOption.push(data.correct_answer))
+  // }
 
   const questionElements = questions.map(data => (
     <Questions 
       question={data.question}
+      // answer={[data.correct_answer, ...data.incorrect_answers]}
     />
   ))
 
