@@ -19,51 +19,41 @@ function App() {
   // }
   
   useEffect(function() {
-      // setQuestions(questionsData?.map(questions => {
-      //   return {
-      //     id: nanoid(),
-
-      //     ...questions
-      //   }
-      // }))
-      // questions && console.log(questions)
-      generateNewQuestions()
-      // generateNewAnswer()
+      setQuestions(generateNewQuestions)
   },[])
 
   function generateNewQuestions() {
     const newQuestions = questionsData?.map(questions => ({
       id: nanoid(),
       question: questions.question,
-      correct_answer: {answer: questions.correct_answer, isTrue: true},
-      // belum ketemu cara masukin incorrect answernya
+      correct_answer: questions.correct_answer,
+      incorrect_answers: questions.incorrect_answers
     }))
-    return console.log(newQuestions)
+    return newQuestions
   }
+
+  // function generateAnswerOption() {
+  //   // wrong syntax for making an object like this
+  //   const answerOptions = [{answer: questions.correct_answer, isTrue: true}]
+  //   const wrongAnswer = questions?.incorrect_answers
+  //   console.log(wrongAnswer.length)
+  //   for(let i=0; i < wrongAnswer.length; i++){
+  //     answerOptions.push({
+  //       answer: wrongAnswer[i],
+  //       isTrue: false
+  //     })
+  //   }
+  //   return answerOptions
+  // }
   
   console.log(questions);
-
-  // function generateNewAnswer() {
-  //   const newAnswer = []
-  //   questionsData?.map(answer => {
-  //     newAnswer.push((answer.correct_answer))
-  //   })
-  //   return console.log(newAnswer)
-  // }
-
-  // function chooseAnswer(id) {
-  //   setQuestions(prevAnswer => prevAnswer.map(answer => (
-  //     answer.id === id ?
-  //       {...answer, isChoosen: !answer.isChoosen}
-  //       : answer
-  //   )))
-  // }
 
   const questionElements = questions?.map(q => (
     <Questions 
       key={q.id}
       question={he.decode(q.question)}
-      answer={[q.correct_answer, ...q.incorrect_answers]}
+      correctAnswer={he.decode(q.correct_answer)}
+      incorrectAnswers={q.incorrect_answers.map(i => he.decode(i))}
       choose={() => chooseAnswer(q.id)}
     />
    ))

@@ -1,26 +1,57 @@
-import he from 'he'
+import { useEffect, useState } from 'react';
 
-const Questions = (props) => {
+const Questions = ({question, correctAnswer, incorrectAnswers}) => {
+    const [options, setOptions] = useState();
+    const [selected, setSelected] = useState(null);
+    const hasPickedAnswer = setSelected !== null
+
+    useEffect(() => {
+        const allAnswers = [correctAnswer, ...incorrectAnswers]
+        const handleShuffle = (answer) => {
+            return answer.sort(() => Math.random() - 0.5)
+        }
+
+        const shuffledAnswers = handleShuffle(allAnswers)
+        setOptions(shuffledAnswers)
+    },[])
+
+    const handleClick = (e) => {
+        const playerAnswer = e.target.innerHTML
+        setSelected(playerAnswer);
+        const wasPlayerCorrect = playerAnswer === correctAnswer;
+        console.log(wasPlayerCorrect)
+    }
+    
     return (
-        <section className="question">
-            {/* {console.log()} */}
-            <p className="question font-Karla text-base">{props.question}</p>
-            <div 
-                className="answer-option flex flex-row mt-3 gap-3 font-Inter font-medium"
-            >
-                {props.answer.map(answer => (
-                    // <Answer 
-                    //     // id={props.id}
-                    //     // value={answer.value}
-                    //     // isChoose={props.}
-                    // />
-                    answer
-                ))}    
-                {/* <p className="text-sm px-4 py-1 rounded-2xl bg-purple-300">Adios</p>    
-                <p className="text-sm border border-purple-400  px-4 py-1 rounded-2xl">Adios</p>     */}   
-            </div>
-            <hr className="mt-4 border-1 border-purple-100" />
-        </section>
+        <div> 
+            <section className="question">
+                <p className="question font-Karla text-base mt-3">{question}</p>
+                <div 
+                    className="answer-option flex flex-row mt-3 gap-3 font-Inter font-medium"
+                >
+                    {options?.map(option => {  
+                        let className = "text-sm px-4 py-1 rounded-2xl"
+                        if(hasPickedAnswer){
+                            if(option === selected){
+                                className += " bg-purple-300"
+                            } else {
+                                className += " border border-purple-400"
+                            }
+                        }
+
+                        return (
+                        <p 
+                            className={className}
+                            onClick={handleClick}
+                            key={option}
+                        >{option}</p>
+                        )
+                    })}
+
+                </div>
+                <hr className="mt-4 border-1 border-purple-100" />
+            </section> 
+        </div>
     );
 }
  
