@@ -1,13 +1,15 @@
+import { nanoid } from 'nanoid'
 import { useState, useEffect } from 'react'
+import questionsData from './data'
 import Home from './components/Home'
 import Questions from './components/Questions'
 import Result from './components/Result'
-import questionsData from './data'
+import he from 'he'
 
 
 function App() {
 
-  const [questions, setQuestions] = useState()
+  const [questions, setQuestions] = useState(null)
   // const [answerOptions, setAnswerOptions] = useState()
 
   // function getQuestions() {
@@ -17,31 +19,59 @@ function App() {
   // }
   
   useEffect(function() {
-      setQuestions(questionsData)
+      // setQuestions(questionsData?.map(questions => {
+      //   return {
+      //     id: nanoid(),
+
+      //     ...questions
+      //   }
+      // }))
+      // questions && console.log(questions)
+      generateNewQuestions()
+      // generateNewAnswer()
   },[])
 
-  // function generateNewQuestions() {
-  //   return {
-  //     id: 
-  //   }
+  function generateNewQuestions() {
+    const newQuestions = questionsData?.map(questions => ({
+      id: nanoid(),
+      question: questions.question,
+      correct_answer: {answer: questions.correct_answer, isTrue: true},
+      // belum ketemu cara masukin incorrect answernya
+    }))
+    return console.log(newQuestions)
+  }
+  
+  console.log(questions);
+
+  // function generateNewAnswer() {
+  //   const newAnswer = []
+  //   questionsData?.map(answer => {
+  //     newAnswer.push((answer.correct_answer))
+  //   })
+  //   return console.log(newAnswer)
   // }
 
-  // function getAnswerOption() {
-  //   const answerOption = []
-  //   questions.map(data => answerOption.push(data.correct_answer))
+  // function chooseAnswer(id) {
+  //   setQuestions(prevAnswer => prevAnswer.map(answer => (
+  //     answer.id === id ?
+  //       {...answer, isChoosen: !answer.isChoosen}
+  //       : answer
+  //   )))
   // }
 
-  const questionElements = questions.map(data => (
+  const questionElements = questions?.map(q => (
     <Questions 
-      question={data.question}
-      // answer={[data.correct_answer, ...data.incorrect_answers]}
+      key={q.id}
+      question={he.decode(q.question)}
+      answer={[q.correct_answer, ...q.incorrect_answers]}
+      choose={() => chooseAnswer(q.id)}
     />
-  ))
+   ))
 
   return (
     <div className="App">
       <div className="bg-fixed text-slate-800 bg-[url('/ssscribble.svg')] h-screen flex justify-center items-center font-Inter font-normal">
-        <section className="quiz-container w-[36rem] flex flex-col items-center justify-center p-12 bg-white rounded-3xl bg-[url('/blue-blobs.svg'),_url('/yellow-blobs.svg')] bg-[position:bottom_left,_top_right] bg-no-repeat">
+        <section className="quiz-container min-w-[36rem] flex flex-col items-center justify-center p-12 bg-white rounded-3xl bg-[url('/blue-blobs.svg'),_url('/yellow-blobs.svg')] bg-[position:bottom_left,_top_right] bg-no-repeat">
           {/* <Home /> */}
           <section className="question-container flex flex-col">
             {questionElements}
