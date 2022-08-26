@@ -12,6 +12,8 @@ function App() {
   const [questions, setQuestions] = useState(null)
   // const [answerOptions, setAnswerOptions] = useState()
 
+  const [isHome, setIsHome] = useState(true)
+
   // function getQuestions() {
   //   fetch('https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple')
   //   .then(res => res.json())
@@ -56,19 +58,42 @@ function App() {
       incorrectAnswers={q.incorrect_answers.map(i => he.decode(i))}
       choose={() => chooseAnswer(q.id)}
     />
-   ))
+  ))
+
+  function questionPage(){
+    return (
+      <>
+        <section className="question-container flex flex-col">
+          {questionElements}
+        </section>
+        <section className="check-answer flex justify-center items-center mt-4">
+          <button 
+            onClick={() => setIsHome(true)} // Temporary button to back Home
+            className="font-Inter text-sm text-zinc-200 bg-sky-600 px-8 py-3 rounded-2xl w-[170px]">Check Answer</button>
+        </section>
+      </>
+    )
+  }
+    
+  function pageContainer(){
+    if(isHome){
+      return <Home start={() => setIsHome(false)} />
+    } else if(!isHome) {
+      return questionPage()
+    }
+  }
 
   return (
     <div className="App">
       <div className="bg-fixed text-slate-800 bg-[url('/ssscribble.svg')] h-screen flex justify-center items-center font-Inter font-normal">
         <section className="quiz-container min-w-[36rem] flex flex-col items-center justify-center p-12 bg-white rounded-3xl bg-[url('/blue-blobs.svg'),_url('/yellow-blobs.svg')] bg-[position:bottom_left,_top_right] bg-no-repeat">
           {/* <Home /> */}
-          <section className="question-container flex flex-col">
-            {questionElements}
-          </section>
-          <section className="check-answer flex justify-center items-center mt-4">
+          {/* <section className="question-container flex flex-col"> */}
+          {pageContainer()}
+          {/* </section> */}
+          {/* <section className="check-answer flex justify-center items-center mt-4">
             <button className="font-Inter text-sm text-zinc-200 bg-sky-600 px-8 py-3 rounded-2xl w-[170px]">Check Answer</button>
-          </section>
+          </section> */}
           {/* <Result /> */}
         </section>
       </div>
