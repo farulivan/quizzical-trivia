@@ -24,14 +24,14 @@ const Answer = (props) => {
                         id={answer}
                         name={props.index}
                         value={answer}
-                        // checked={formData.employment ===  {answer}}
                         onChange={props.handleChange}
                         disabled={props.finish}
                     />
                     <label 
                         className=
                         {`
-                            inline-flex font-Inter font-normal text-sm justify-between items-center px-5 py-2 w-full cursor-pointer rounded-2xl 
+                            inline-flex font-Inter font-normal text-[8px] sm:text-xs text-center justify-between items-center 
+                            px-5 py-2 w-full cursor-pointer rounded-2xl 
                             peer-checked:border-0 hover:bg-gray-100
                             ${props.finish ? 
                                 answer === props.correctAnswer ? 
