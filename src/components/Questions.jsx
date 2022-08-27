@@ -56,7 +56,7 @@ const Questions = (props) => {
                                 className="question-container mt-3 border-b-2 border-b-sky-100" 
                                 key={q.question}
                             >
-                                <legend className="question font-Karla text-[12px] sm:text-base">{he.decode(q.question)}</legend>
+                                <legend className="question font-Karla text-sm sm:text-base">{he.decode(q.question)}</legend>
                                 <Answer
                                     index={i+1}
                                     correctAnswer={q.correct_answer}

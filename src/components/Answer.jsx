@@ -30,7 +30,7 @@ const Answer = (props) => {
                     <label 
                         className=
                         {`
-                            inline-flex font-Inter font-normal text-[8px] sm:text-xs text-center justify-between items-center 
+                            inline-flex font-Inter font-normal text-[10px] sm:text-xs text-center justify-between items-center 
                             px-5 py-2 w-full cursor-pointer rounded-2xl 
                             peer-checked:border-0 hover:bg-gray-100
                             ${props.finish ? 
