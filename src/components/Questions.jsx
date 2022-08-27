@@ -1,57 +1,86 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+import questionsData from "../data";
+import Answer from "./Answer";
 
-const Questions = ({question, correctAnswer, incorrectAnswers}) => {
-    const [options, setOptions] = useState();
-    const [selected, setSelected] = useState(null);
-    const hasPickedAnswer = setSelected !== null
+const Questions = (props) => {
+    const [questions, setQuestions] = useState(null)
+    const [userAnswer, setUserAnswer] = useState(
+        {
+            1: "",
+            2: "",
+            3: "",
+            4: "",
+            5: ""
+        }
+    )
+    const [score, setScore] = useState(0)
+
+    const scoreCalculation = () => {
+        for(let i=0; i < 5; i++){
+            if (userAnswer[i+1] === questions[i].correct_answer){
+                setScore(score => score+1)
+            }
+        }
+    }
+
+    console.log(score)
 
     useEffect(() => {
-        const allAnswers = [correctAnswer, ...incorrectAnswers]
-        const handleShuffle = (answer) => {
-            return answer.sort(() => Math.random() - 0.5)
-        }
-
-        const shuffledAnswers = handleShuffle(allAnswers)
-        setOptions(shuffledAnswers)
+        const questionElements = questionsData?.map(q =>q)
+        setQuestions(questionElements) 
     },[])
 
-    const handleClick = (e) => {
-        const playerAnswer = e.target.innerHTML
-        setSelected(playerAnswer);
-        const wasPlayerCorrect = playerAnswer === correctAnswer;
-        console.log(wasPlayerCorrect)
+    // const [formData, setFormData] = React.useState(
+    //     {
+    //         firstName: "", 
+    //         lastName: "", 
+    //         email: "", 
+    //         comments: "", 
+    //         isFriendly: true,
+    //         employment: ""
+    //     }
+    // )
+
+    // console.log(formData.employment)
+    
+    function handleChange(event) {
+        const {name, value, type, checked} = event.target
+        setUserAnswer(prevFormData => {
+            return {
+                ...prevFormData,
+                [name]: value
+            }
+        })
     }
     
-    return (
-        <div> 
-            <section className="question">
-                <p className="question font-Karla text-base mt-3">{question}</p>
-                <div 
-                    className="answer-option flex flex-row mt-3 gap-3 font-Inter font-medium"
-                >
-                    {options?.map(option => {  
-                        let className = "text-sm px-4 py-1 rounded-2xl"
-                        if(hasPickedAnswer){
-                            if(option === selected){
-                                className += " bg-purple-300"
-                            } else {
-                                className += " border border-purple-400"
-                            }
-                        }
-
-                        return (
-                        <p 
-                            className={className}
-                            onClick={handleClick}
-                            key={option}
-                        >{option}</p>
+    return ( 
+        questions &&
+            <section className="questions">
+                <section className="flex flex-col">
+                    {questionsData.map((q, i) => {
+                        return(
+                            <fieldset className="question-container mt-3 border-b-2 border-b-sky-100" key={q.question}>
+                                <legend className="question font-Karla text-base">{q.question}</legend>
+                                <Answer
+                                    index={i+1}
+                                    correctAnswer={q.correct_answer}
+                                    incorrectAnswers={q.incorrect_answers}
+                                    handleChange={handleChange}
+                                />
+                            </fieldset>
                         )
                     })}
-
-                </div>
-                <hr className="mt-4 border-1 border-purple-100" />
-            </section> 
-        </div>
+                </section>
+                <section className="check-answer flex justify-center items-center mt-4">
+                    <p className="font-Inter font-semibold mr-7">You scored {score} / {questions.length} correct answers</p>
+                    <button 
+                        onClick={() => scoreCalculation()} // Temporary button to back Home
+                        className="font-Inter text-sm text-white bg-sky-600 px-8 py-3 rounded-2xl w-[170px]"
+                    >
+                        Check Answers
+                    </button>
+                </section>
+            </section>   
     );
 }
  
