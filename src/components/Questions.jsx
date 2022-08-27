@@ -14,6 +14,7 @@ const Questions = (props) => {
         }
     )
     const [score, setScore] = useState(0)
+    const [finish, setFinish] = useState(false)
 
     const scoreCalculation = () => {
         for(let i=0; i < 5; i++){
@@ -22,8 +23,6 @@ const Questions = (props) => {
             }
         }
     }
-
-    console.log(score)
 
     useEffect(() => {
         const questionElements = questionsData?.map(q =>q)
@@ -52,6 +51,11 @@ const Questions = (props) => {
             }
         })
     }
+
+    function handleClick() {
+        scoreCalculation()
+        setFinish(true)
+    }
     
     return ( 
         questions &&
@@ -59,26 +63,38 @@ const Questions = (props) => {
                 <section className="flex flex-col">
                     {questionsData.map((q, i) => {
                         return(
-                            <fieldset className="question-container mt-3 border-b-2 border-b-sky-100" key={q.question}>
+                            <fieldset 
+                                className="question-container mt-3 border-b-2 border-b-sky-100" 
+                                key={q.question}
+                            >
                                 <legend className="question font-Karla text-base">{q.question}</legend>
                                 <Answer
                                     index={i+1}
                                     correctAnswer={q.correct_answer}
                                     incorrectAnswers={q.incorrect_answers}
                                     handleChange={handleChange}
+                                    finish={finish}
                                 />
                             </fieldset>
                         )
                     })}
                 </section>
                 <section className="check-answer flex justify-center items-center mt-4">
-                    <p className="font-Inter font-semibold mr-7">You scored {score} / {questions.length} correct answers</p>
-                    <button 
-                        onClick={() => scoreCalculation()} // Temporary button to back Home
+                    {finish && <p className="font-Inter font-semibold mr-7">You scored {score} / {questions.length} correct answers</p>}
+                    {finish ? 
+                        <button 
+                        onClick={() => props.back()}
                         className="font-Inter text-sm text-white bg-sky-600 px-8 py-3 rounded-2xl w-[170px]"
-                    >
-                        Check Answers
-                    </button>
+                        >
+                        Play Again
+                        </button> :
+                            <button 
+                            onClick={() => handleClick()}
+                            className="font-Inter text-sm text-white bg-sky-600 px-8 py-3 rounded-2xl w-[170px]"
+                            >
+                                Check Answers
+                            </button>
+                    }
                 </section>
             </section>   
     );
