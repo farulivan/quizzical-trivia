@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import questionsData from "../data";
 import Answer from "./Answer";
+import he from 'he';
 
 const Questions = (props) => {
     const [questions, setQuestions] = useState(null)
@@ -67,7 +68,7 @@ const Questions = (props) => {
                                 className="question-container mt-3 border-b-2 border-b-sky-100" 
                                 key={q.question}
                             >
-                                <legend className="question font-Karla text-base">{q.question}</legend>
+                                <legend className="question font-Karla text-base">{he.decode(q.question)}</legend>
                                 <Answer
                                     index={i+1}
                                     correctAnswer={q.correct_answer}

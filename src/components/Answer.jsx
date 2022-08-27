@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import he from 'he';
+
 
 const Answer = (props) => {
     const [answerOptions, setAnswerOptions] = useState()
@@ -17,21 +19,29 @@ const Answer = (props) => {
                 return (
                 <section key={answer}>
                     <input
-                        className="hidden peer"
+                        className={`hidden peer correct`}
                         type="radio"
                         id={answer}
                         name={props.index}
                         value={answer}
                         // checked={formData.employment ===  {answer}}
                         onChange={props.handleChange}
-                        required
                         disabled={props.finish}
                     />
                     <label 
-                        className="inline-flex font-Inter font-normal text-sm justify-between items-center px-5 py-2 w-full bg-white rounded-2xl border border-sky-900 cursor-pointer peer-checked:bg-sky-200 peer-checked:border-0 hover:bg-gray-100"
+                        className=
+                        {`
+                            inline-flex font-Inter font-normal text-sm justify-between items-center px-5 py-2 w-full cursor-pointer rounded-2xl 
+                            peer-checked:border-0 hover:bg-gray-100
+                            ${props.finish ? 
+                                answer === props.correctAnswer ? 
+                                    'peer-checked:bg-emerald-300 bg-emerald-300' : 'peer-checked:bg-red-300 opacity-50 border border-sky-900'
+                                : 'border border-sky-900 peer-checked:bg-sky-200'
+                            }
+                        `}
                         htmlFor={answer}
                     >
-                        {answer}
+                        {he.decode(answer)}
                     </label>
                 </section>
                 )
