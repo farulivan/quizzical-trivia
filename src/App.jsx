@@ -3,38 +3,9 @@ import { useState, useEffect } from 'react'
 import questionsData from './data'
 import Home from './components/Home'
 import Questions from './components/Questions'
-import he from 'he'
-
 
 function App() {
-  const [questions, setQuestions] = useState(null)
   const [isHome, setIsHome] = useState(true)
-  
-  // useEffect(function() {
-
-  // },[])
-
-  // function generateNewQuestions() {
-  //   const newQuestions = questionsData?.map(questions => ({
-  //     id: nanoid(),
-  //     question: questions.question,
-  //     correct_answer: questions.correct_answer,
-  //     incorrect_answers: questions.incorrect_answers
-  //   }))
-  //   return newQuestions
-  // }
-
-  // const questionElements = questions?.map(q => (
-  //   <Questions 
-  //     key={q.id}
-  //     question={he.decode(q.question)}
-  //     correctAnswer={he.decode(q.correct_answer)}
-  //     incorrectAnswers={q.incorrect_answers.map(i => he.decode(i))}
-  //     choose={() => chooseAnswer(q.id)}
-  //   />
-  // ))
-
-
 
   return (
     <div className="App">

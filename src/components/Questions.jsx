@@ -25,23 +25,11 @@ const Questions = (props) => {
         }
     }
 
-    useEffect(() => {
-        const questionElements = questionsData?.map(q =>q)
-        setQuestions(questionElements) 
-    },[])
-
-    // const [formData, setFormData] = React.useState(
-    //     {
-    //         firstName: "", 
-    //         lastName: "", 
-    //         email: "", 
-    //         comments: "", 
-    //         isFriendly: true,
-    //         employment: ""
-    //     }
-    // )
-
-    // console.log(formData.employment)
+    useEffect(function() {
+        fetch('https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple')
+          .then(data => data.json())
+          .then(response => setQuestions(response.results))
+      },[])
     
     function handleChange(event) {
         const {name, value, type, checked} = event.target
@@ -62,7 +50,7 @@ const Questions = (props) => {
         questions &&
             <section className="questions">
                 <section className="flex flex-col">
-                    {questionsData.map((q, i) => {
+                    {questions.map((q, i) => {
                         return(
                             <fieldset 
                                 className="question-container mt-3 border-b-2 border-b-sky-100" 
