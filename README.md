@@ -26,3 +26,10 @@ Quenstiions Page (after answered)
 - Make some components and state that can be sync/pass to each other
 - Many challenging conditionals syntax should be done to make this works as supposed to be
 - The raw data from API must be processed (this is tricky enough) correctly to apply it in this project
+
+## Tools 
+- Vite for setup
+- ReactJS for everything
+- NodeJS for NPM API
+- Tailwind for styling
+- Vercel for deployment
