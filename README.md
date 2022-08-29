@@ -5,16 +5,24 @@ This 'Meme Generator' is the Final Project that I did when I learn React from Re
 > "a trivia game or competition is one where the competitors are asked questions about interesting but unimportant facts in many subjects" - Collins Dictionary
 
 ## Overview
-![image](https://user-images.githubusercontent.com/107041835/187060851-06089096-bd9b-4f5a-b066-0cb7bc9ed213.png)
-Start Page
 
-![image](https://user-images.githubusercontent.com/107041835/187060875-708cff0f-8d92-483d-a2e0-f4c2859dc58d.png)
-Questions Page (before answered)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/107041835/187060851-06089096-bd9b-4f5a-b066-0cb7bc9ed213.png" width="500px"/>
+  <br />
+  Start
+</p>
 
-![image](https://user-images.githubusercontent.com/107041835/187061202-6077caac-6ca5-469e-ade2-ec8cfb8734f5.png)
-Quenstiions Page (after answered)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/107041835/187060875-708cff0f-8d92-483d-a2e0-f4c2859dc58d.png" width="500px"/>
+  <br />
+  Questions Page - before answered
+</p>
 
-
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/107041835/187061202-6077caac-6ca5-469e-ade2-ec8cfb8734f5.png" width="500px"/>
+  <br />
+  Quenstiions Page - after answered
+</p>
 
 ## Features
 - Two screens (start & questions)
