@@ -21,11 +21,11 @@ This 'Quizzical Trivia' is the Final Project that I did when I learn React from 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/107041835/187061202-6077caac-6ca5-469e-ade2-ec8cfb8734f5.png" width="500px"/>
   <br />
-  Quenstiions Page - after answered
+  Questions Page - after answered
 </p>
 
 ## Features
-- Two screens (start & questions)
+- Three-step pages (start, test, result)
 - Pull 5 questions from the OTDB API
 - Tally correct answers after "Check answers" is clicked
 - Styled & polished UI
