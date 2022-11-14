@@ -1,5 +1,5 @@
 # Quizzical Trivia
-This 'Meme Generator' is the Final Project that I did when I learn React from React Course (Scrimba) by Bob Ziroll (Head of Education at Scrimba). This Final Project is like a Final Test to pass the course because it's unguided, I make it from scratch, and Bob only tells me how is the UI and how it should be worked.
+This 'Quizzical Trivia' is the Final Project that I did when I learn React from React Course (Scrimba) by Bob Ziroll (Head of Education at Scrimba). This Final Project is like a Final Test to pass the course because it's unguided, I make it from scratch, and Bob only tells me how is the UI and how it should be worked.
 
 ## What is trivia quiz?
 > "a trivia game or competition is one where the competitors are asked questions about interesting but unimportant facts in many subjects" - Collins Dictionary
